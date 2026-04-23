@@ -1,0 +1,92 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+  :root = token declaration layer
+  --------------------------------
+  :root is the document root selector, so normal CSS properties can be used here.
+  In this practice project, we keep :root focused on CSS variables only so that
+  design tokens and actual global styling are easier to tell apart.
+*/
+:root {
+  /*
+    Semantic color agreement
+    - primary: main CTA and important interaction color
+    - accent: secondary emphasis or selected state
+    - point: limited promotional/highlight color
+    - destructive: delete, error, or dangerous action
+    - muted: low-emphasis surface
+    - border: default divider/input/card border
+  */
+  --color-primary: 226 100% 50%;
+  --color-primary-foreground: 0 0% 100%;
+  --color-accent: 272 100% 62%;
+  --color-accent-foreground: 0 0% 100%;
+  --color-point: 38 92% 50%;
+  --color-point-foreground: 222 47% 11%;
+  --color-destructive: 0 72% 51%;
+  --color-destructive-foreground: 0 0% 100%;
+  --color-background: 0 0% 100%;
+  --color-foreground: 222 47% 11%;
+  --color-muted: 214 32% 92%;
+  --color-muted-foreground: 215 16% 47%;
+  --color-border: 214 32% 88%;
+
+  /*
+    Spacing and radius tokens
+    These are mapped in tailwind.config.js as p-token-4, gap-token-2,
+    rounded-md, rounded-lg, and so on.
+  */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+
+  --font-sans: system-ui, 'Segoe UI', Roboto, sans-serif;
+  --font-heading: system-ui, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: ui-monospace, Consolas, monospace;
+}
+
+/*
+  html/body = global style application layer
+  ------------------------------------------
+  The tokens above are values. The styles below decide where those values are
+  actually applied to the document.
+*/
+html {
+  color-scheme: light;
+  font: 18px/145% var(--font-sans);
+  letter-spacing: 0.18px;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background: hsl(var(--color-background));
+  color: hsl(var(--color-foreground));
+}
+
+#root {
+  min-height: 100vh;
+}
+
+/*
+  Dark mode note
+  --------------
+  We intentionally do not use @media (prefers-color-scheme: dark) yet.
+  During the first learning phase, light mode is fixed so that token values are
+  easy to inspect. Later, dark mode can be added with [data-theme="dark"].
+*/
