@@ -3,14 +3,13 @@ import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '../../lib/cn';
 
 const alertVariants = cva(
-  'relative w-full rounded-lg border px-token-4 py-token-3 text-sm',
+  'relative w-full rounded-crd border px-pad py-pad text-body-md',
   {
     variants: {
       variant: {
-        default: 'border-border bg-background text-foreground',
-        muted: 'border-border bg-muted/50 text-foreground',
-        destructive:
-          'border-destructive/30 bg-destructive/10 text-destructive',
+        default: 'border-line bg-surface-card text-ink-primary',
+        muted: 'border-line bg-surface-subtle text-ink-primary',
+        destructive: 'border-line-error bg-surface-error text-ink-error',
       },
     },
     defaultVariants: {
@@ -39,7 +38,7 @@ export function AlertTitle({
 }: React.HTMLAttributes<HTMLHeadingElement>) {
   return (
     <h5
-      className={cn('mb-token-1 font-semibold leading-none tracking-tight', className)}
+      className={cn('mb-1 text-info-title leading-none tracking-tight', className)}
       {...props}
     />
   );
@@ -51,7 +50,7 @@ export function AlertDescription({
 }: React.HTMLAttributes<HTMLDivElement>) {
   return (
     <div
-      className={cn('text-sm leading-6 text-muted-foreground', className)}
+      className={cn('text-body-sm leading-6 text-ink-secondary', className)}
       {...props}
     />
   );

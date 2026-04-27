@@ -8,7 +8,7 @@ export const RadioGroup = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <RadioGroupPrimitive.Root
     ref={ref}
-    className={cn('grid gap-token-2', className)}
+    className={cn('grid gap-pad-sm', className)}
     {...props}
   />
 ));
@@ -22,18 +22,15 @@ export const RadioGroupItem = React.forwardRef<
   <RadioGroupPrimitive.Item
     ref={ref}
     className={cn(
-      'size-4 shrink-0 rounded-full border border-border bg-background shadow-sm transition-colors',
-      'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary',
-      'disabled:cursor-not-allowed disabled:opacity-50',
+      'size-4 shrink-0 rounded-full border border-line bg-surface-card shadow-sm transition-colors',
+      'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-line-focus',
+      'cursor-pointer disabled:cursor-not-allowed disabled:opacity-50',
       className,
     )}
     {...props}
   >
     <RadioGroupPrimitive.Indicator className="flex items-center justify-center">
-      <span
-        aria-hidden="true"
-        className="block size-2 rounded-full bg-primary"
-      />
+      <span aria-hidden="true" className="block size-2 rounded-full bg-action-primary" />
     </RadioGroupPrimitive.Indicator>
   </RadioGroupPrimitive.Item>
 ));

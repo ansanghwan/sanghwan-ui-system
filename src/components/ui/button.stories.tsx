@@ -11,7 +11,7 @@ const meta = {
   argTypes: {
     variant: {
       control: 'select',
-      options: ['primary', 'outline', 'ghost', 'destructive'],
+      options: ['primary', 'secondary', 'ghost', 'destructive', 'outline'],
     },
     size: {
       control: 'select',
@@ -32,11 +32,56 @@ export const Overview: Story = {};
 
 export const AllVariants: Story = {
   render: () => (
-    <div className="flex gap-token-2">
+    <div className="flex flex-wrap gap-comp-gap">
       <Button>Primary</Button>
-      <Button variant="outline">Outline</Button>
+      <Button variant="secondary">Secondary</Button>
       <Button variant="ghost">Ghost</Button>
       <Button variant="destructive">Delete</Button>
+    </div>
+  ),
+};
+
+export const SizeAndState: Story = {
+  render: () => (
+    <div className="grid gap-sec">
+      <div className="flex flex-wrap items-center gap-comp-gap">
+        <Button size="sm">Primary</Button>
+        <Button size="md">Primary</Button>
+        <Button size="lg">Primary</Button>
+      </div>
+      <div className="flex flex-wrap items-center gap-comp-gap">
+        <Button variant="secondary" size="sm">
+          Secondary
+        </Button>
+        <Button variant="secondary" size="md">
+          Secondary
+        </Button>
+        <Button variant="secondary" size="lg">
+          Secondary
+        </Button>
+      </div>
+      <div className="flex flex-wrap items-center gap-comp-gap">
+        <Button variant="ghost" size="sm">
+          Ghost
+        </Button>
+        <Button variant="ghost" size="md">
+          Ghost
+        </Button>
+        <Button variant="ghost" size="lg">
+          Ghost
+        </Button>
+      </div>
+      <div className="flex flex-wrap items-center gap-comp-gap">
+        <Button disabled size="md">
+          Disabled
+        </Button>
+        <Button disabled variant="secondary" size="md">
+          Disabled
+        </Button>
+        <Button disabled variant="ghost" size="md">
+          Disabled
+        </Button>
+      </div>
     </div>
   ),
 };

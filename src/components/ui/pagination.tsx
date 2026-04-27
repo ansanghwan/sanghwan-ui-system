@@ -15,9 +15,7 @@ export function PaginationList({
   className,
   ...props
 }: React.HTMLAttributes<HTMLUListElement>) {
-  return (
-    <ul className={cn('flex items-center gap-token-2', className)} {...props} />
-  );
+  return <ul className={cn('flex items-center gap-pad-sm', className)} {...props} />;
 }
 
 export interface PaginationItemProps
@@ -34,9 +32,10 @@ export function PaginationItem({
     <li>
       <button
         className={cn(
-          'inline-flex size-9 items-center justify-center rounded-md border border-border bg-background text-sm text-foreground transition-colors',
-          'hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary',
-          isActive && 'border-primary bg-primary text-primary-foreground hover:bg-primary/90',
+          'inline-flex size-9 items-center justify-center rounded-btn border border-line bg-surface-card text-body-md text-ink-primary transition-colors',
+          'hover:bg-surface-subtle focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-line-focus',
+          isActive &&
+            'border-action-primary bg-action-primary text-ink-inverse hover:bg-action-primary-hover',
           className,
         )}
         {...props}

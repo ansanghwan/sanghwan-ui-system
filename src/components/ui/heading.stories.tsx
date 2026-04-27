@@ -31,14 +31,14 @@ export const Overview: Story = {};
 
 export const TypographyScale: Story = {
   render: () => (
-    <div className="space-y-token-4 rounded-lg border border-border bg-background p-token-6">
-      <div className="space-y-token-2">
+    <div className="space-y-comp-gap rounded-crd border border-line bg-surface-card p-lay">
+      <div className="space-y-pad-sm">
         <HelperText>System title is handled separately. Page title starts from h2 in this project.</HelperText>
-        <PageTitle>Design Tokens</PageTitle>
+        <PageTitle>Dashboard Overview</PageTitle>
       </div>
-      <div className="space-y-token-2">
-        <SectionTitle>Color Tokens</SectionTitle>
-        <SectionSubtitle>Primary and destructive actions</SectionSubtitle>
+      <div className="space-y-pad-sm">
+        <SectionTitle>User Management</SectionTitle>
+        <SectionSubtitle>Total users</SectionSubtitle>
         <HelperText>Use semantic token names before applying raw values to components.</HelperText>
       </div>
     </div>

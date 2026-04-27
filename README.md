@@ -1,121 +1,117 @@
-# Design System Practice
+# Sanghwan UI System
 
-React + TypeScript + Tailwind CSS를 직접 세팅하면서 디자인 토큰과 컴포넌트 라이브러리 구조를 학습하는 연습 프로젝트입니다.
+React + TypeScript 기반의 관리자 UI 디자인 시스템 포트폴리오 프로젝트입니다.  
+Tailwind CSS, semantic token, Storybook 문서화 흐름을 학습하고 실제 화면 조합까지 연결하는 것을 목표로 구성했습니다.
 
-## Semantic Token Agreement
+## Overview
 
-디자인 토큰 작업은 색상값을 코드에 옮기기 전에, 팀에서 먼저 역할 기반 이름을 합의하는 과정이 중요합니다. 이 프로젝트에서는 아래 의미로 토큰 이름을 사용합니다.
+이 프로젝트는 BSS(PC 관리자) 맥락을 기준으로 다음 범위를 다룹니다.
 
-| Token                | Meaning                     | Usage                          |
-| -------------------- | --------------------------- | ------------------------------ |
-| `primary`            | 가장 중요한 사용자 액션     | 저장, 생성, 적용 버튼          |
-| `primary-foreground` | primary 위의 텍스트         | primary button text            |
-| `accent`             | 보조 강조 또는 선택 상태    | active tab, selected item      |
-| `point`              | 제한적으로 쓰는 포인트 강조 | new badge, promotion highlight |
-| `destructive`        | 위험/삭제/오류 액션         | delete button, error state     |
-| `background`         | 기본 화면 배경              | page background                |
-| `foreground`         | 기본 텍스트                 | heading, body text             |
-| `muted`              | 낮은 위계의 보조 배경       | helper area, inactive surface  |
-| `muted-foreground`   | 낮은 위계의 보조 텍스트     | description, hint text         |
-| `border`             | 기본 경계선                 | card, input, table border      |
+- Basic UI 컴포넌트 설계
+- Semantic token을 CSS variable과 Tailwind utility로 매핑
+- Storybook 기반 상태 문서화
+- 관리자 샘플 페이지 조합
 
-## Token Flow
+## Tech Stack
 
-Figma에서 확인한 raw value를 바로 컴포넌트에 넣지 않고, UI 역할에 맞는 semantic token으로 번역한 뒤 CSS Variable과 Tailwind theme에 연결합니다.
+- React
+- TypeScript
+- Tailwind CSS
+- Storybook
+- Radix UI
+- class-variance-authority
 
-```txt
-Figma Inspect value
-  -> raw token
-  -> semantic token
-  -> CSS variable
-  -> tailwind.config.js
-  -> component class
-```
+## Included Components
 
-예시:
+### Basic
 
-| Figma Value | Raw Token   | Semantic Token       | CSS Variable                 | Tailwind                  |
-| ----------- | ----------- | -------------------- | ---------------------------- | ------------------------- |
-| `#003cff`   | `blue-500`  | `primary`            | `--color-primary`            | `bg-primary`              |
-| `#ffffff`   | `white`     | `primary-foreground` | `--color-primary-foreground` | `text-primary-foreground` |
-| `#111827`   | `gray-900`  | `foreground`         | `--color-foreground`         | `text-foreground`         |
-| `#e5e7eb`   | `gray-200`  | `border`             | `--color-border`             | `border-border`           |
-| `16px`      | `space-4`   | `content-padding`    | `--space-4`                  | `p-token-4`               |
-| `8px`       | `radius-md` | `control-radius`     | `--radius-md`                | `rounded-md`              |
+- Button
+- Input
+- Textarea
+- Select
+- Checkbox
+- RadioGroup
+- Badge
+- Card
+- Heading
 
-## Current Tailwind Mapping
+### Composite
 
-`src/index.css`에서 CSS Variables를 정의하고, `tailwind.config.js`에서 Tailwind class로 연결합니다.
+- Dialog
+- Tabs
+- Table
+- Pagination
+- Alert
+- Toast
 
-```css
-:root {
-  --color-primary: 226 100% 50%;
-  --color-foreground: 222 47% 11%;
-  --color-border: 214 32% 88%;
-}
-```
+## Token System
 
-```js
-colors: {
-  primary: "hsl(var(--color-primary))",
-  foreground: "hsl(var(--color-foreground))",
-  border: "hsl(var(--color-border))",
-}
-```
-
-컴포넌트에서는 실제 색상값 대신 semantic class를 사용합니다.
-
-```tsx
-<button className="rounded-md bg-primary px-token-4 py-token-2 text-primary-foreground">
-  Save
-</button>
-```
-
-## Global CSS Structure
-
-이 프로젝트에서는 전역 CSS의 역할을 아래처럼 나눕니다.
+Figma에서 정의한 token을 아래 흐름으로 연결했습니다.
 
 ```txt
-:root
-= token declaration layer
-
-html / body
-= global style application layer
+Figma token
+-> CSS variable
+-> tailwind.config.js mapping
+-> component class
 ```
 
-`:root`는 CSS 변수 전용 문법은 아니고 문서의 최상위 요소 선택자입니다. 그래서 일반 CSS 속성도 넣을 수 있지만, 학습 단계에서는 역할을 명확히 하기 위해 `:root`에는 디자인 토큰 변수만 둡니다.
+현재 프로젝트는 다음 semantic 축을 중심으로 구성되어 있습니다.
 
-```css
-:root {
-  --color-primary: 226 100% 50%;
-  --color-background: 0 0% 100%;
-  --radius-md: 0.5rem;
-}
-```
+- `surface`
+- `ink`
+- `line`
+- `action`
+- `spacing`
+- `radius`
+- `typography`
 
-실제 화면에 배경색, 글자색, 폰트, 기본 여백을 적용하는 코드는 `html`과 `body`에 둡니다.
+## Pages
 
-```css
-html {
-  color-scheme: light;
-  font: 18px/145% var(--font-sans);
-}
+앱 안에는 아래 샘플 화면이 포함되어 있습니다.
 
-body {
-  margin: 0;
-  background: hsl(var(--color-background));
-  color: hsl(var(--color-foreground));
-}
-```
+- Home
+- Dashboard
+- User Management
+- Token Showcase
 
-다크모드는 아직 자동 적용하지 않습니다. `@media (prefers-color-scheme: dark)`를 쓰면 OS 다크모드 설정에 따라 Storybook과 앱 배경이 자동으로 어두워질 수 있기 때문입니다. 나중에 필요하면 `[data-theme="dark"]` 방식으로 명시적으로 추가합니다.
+`Dashboard`와 `User Management`는 관리자 화면 샘플 페이지이며,  
+`Token Showcase`는 토큰과 컴포넌트 조합을 한 번에 확인하기 위한 데모 페이지입니다.
 
-## Scripts
+## Storybook
 
-PowerShell에서는 `npm` 대신 `npm.cmd` 사용을 권장합니다.
+Storybook에서는 개별 컴포넌트의:
+
+- 기본 상태
+- 상호작용 상태
+- 크기/variant
+- 문서화된 예제
+
+를 확인할 수 있도록 구성했습니다.
+
+## Local Development
 
 ```bash
-npm.cmd install
-npm.cmd run dev
-npm.cmd run build
+npm install
+npm run dev
 ```
+
+Storybook 실행:
+
+```bash
+npm run storybook
+```
+
+빌드:
+
+```bash
+npm run build
+```
+
+## Purpose
+
+이 프로젝트는 단순 예제 저장소가 아니라, 아래 목적을 함께 갖고 있습니다.
+
+- 포트폴리오 제출용 UI 시스템 정리
+- Tailwind CSS와 token mapping 학습
+- Storybook 기반 컴포넌트 문서화 경험 정리
+- 관리자 화면 조합형 UI 설계 경험 정리

@@ -3,19 +3,24 @@ import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '../../lib/cn';
 
 const buttonVariants = cva(
-  'inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50',
+  'inline-flex items-center justify-center rounded-btn text-body-md font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-line-focus disabled:pointer-events-none disabled:opacity-40',
   {
     variants: {
       variant: {
-        primary: 'bg-blue-600 text-white hover:bg-blue-700',
-        outline: 'border border-gray-300 bg-white text-gray-900 hover:bg-gray-100',
-        ghost: 'text-gray-900 hover:bg-gray-100',
-        destructive: 'bg-red-600 text-white hover:bg-red-700',
+        primary:
+          'bg-action-primary text-ink-inverse hover:bg-action-primary-hover',
+        secondary:
+          'border border-line bg-surface-card text-ink-primary hover:bg-surface-subtle',
+        outline:
+          'border border-line bg-surface-card text-ink-primary hover:bg-surface-subtle',
+        ghost: 'text-ink-primary hover:bg-surface-subtle',
+        destructive:
+          'border border-line-error bg-surface-error text-ink-error hover:bg-surface-error',
       },
       size: {
-        sm: 'h-8 px-3',
-        md: 'h-10 px-4',
-        lg: 'h-12 px-6 text-base',
+        sm: 'h-8 min-w-[88px] px-pad-sm',
+        md: 'h-10 min-w-[104px] px-pad',
+        lg: 'h-12 min-w-[124px] px-6 text-info-title',
       },
     },
     defaultVariants: {

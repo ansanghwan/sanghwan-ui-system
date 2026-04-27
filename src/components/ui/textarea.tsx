@@ -9,8 +9,8 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
     <textarea
       ref={ref}
       className={cn(
-        'flex min-h-[120px] w-full rounded-md border border-border bg-background px-token-3 py-token-2 text-sm transition-colors',
-        'placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary',
+        'flex min-h-[120px] w-full rounded-inp border border-line bg-surface-card px-pad py-pad-sm text-body-md text-ink-primary transition-colors',
+        'placeholder:text-ink-secondary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-line-focus',
         'disabled:cursor-not-allowed disabled:opacity-50',
         className,
       )}

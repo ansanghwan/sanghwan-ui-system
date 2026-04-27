@@ -1,0 +1,113 @@
+/*
+  BSS Admin Design System — CSS Custom Properties
+  Source: Figma > 🎨 Design Tokens > 07 CSS Variables Reference
+
+  Naming convention:
+  --color-bg-*       : background role colors
+  --color-text-*     : text/content role colors
+  --color-border-*   : border/divider role colors
+  --color-interactive-* : interactive element colors
+  --spacing-*        : component spacing
+  --radius-*         : border radius by component
+  --typo-*-size/height/weight : typography composite
+*/
+
+:root {
+  /* Background */
+  --color-bg-page:            #F8FAFC;
+  --color-bg-surface:         #FFFFFF;
+  --color-bg-subtle:          #F1F5F9;
+  --color-bg-primary:         #3B82F6;
+  --color-bg-primary-hover:   #1D4ED8;
+  --color-bg-success:         #F0FDF4;
+  --color-bg-warning:         #FEFCE8;
+  --color-bg-error:           #FEF2F2;
+  --color-bg-info:            #F0F9FF;
+
+  /* Text */
+  --color-text-primary:       #0F172A;
+  --color-text-secondary:     #475569;
+  --color-text-disabled:      #94A3B8;
+  --color-text-on-primary:    #FFFFFF;
+  --color-text-success:       #15803D;
+  --color-text-warning:       #A16207;
+  --color-text-error:         #B91C1C;
+  --color-text-info:          #0369A1;
+
+  /* Border */
+  --color-border-default:     #E2E8F0;
+  --color-border-focus:       #3B82F6;
+  --color-border-error:       #EF4444;
+
+  /* Interactive */
+  --color-interactive-primary:       #3B82F6;
+  --color-interactive-primary-hover: #1D4ED8;
+
+  /* Spacing */
+  --spacing-component-padding-sm: 8px;
+  --spacing-component-padding:    12px;
+  --spacing-component-gap:        16px;
+  --spacing-section-gap:          24px;
+  --spacing-layout-gap:           32px;
+
+  /* Radius */
+  --radius-button: 6px;
+  --radius-card:   8px;
+  --radius-input:  6px;
+  --radius-badge:  9999px;
+  --radius-modal:  12px;
+
+  /* Typography — heading/page-title */
+  --typo-page-title-size:   28px;
+  --typo-page-title-height: 36px;
+  --typo-page-title-weight: 700;
+
+  /* Typography — heading/section-title */
+  --typo-sec-title-size:    20px;
+  --typo-sec-title-height:  28px;
+  --typo-sec-title-weight:  600;
+
+  /* Typography — heading/info-title */
+  --typo-info-title-size:   16px;
+  --typo-info-title-height: 24px;
+  --typo-info-title-weight: 600;
+
+  /* Typography — body/default */
+  --typo-body-size:         14px;
+  --typo-body-height:       22px;
+  --typo-body-weight:       400;
+
+  /* Typography — body/small */
+  --typo-body-sm-size:      12px;
+  --typo-body-sm-height:    18px;
+  --typo-body-sm-weight:    400;
+
+  /* Typography — list-item/title */
+  --typo-list-ttl-size:     14px;
+  --typo-list-ttl-height:   22px;
+  --typo-list-ttl-weight:   500;
+
+  /* Typography — list-item/body */
+  --typo-list-body-size:    12px;
+  --typo-list-body-height:  18px;
+  --typo-list-body-weight:  400;
+}
+
+[data-theme="dark"] {
+  --color-bg-page:                  #0F172A;
+  --color-bg-surface:               #1E293B;
+  --color-bg-subtle:                #1E293B;
+  --color-bg-primary:               #1D4ED8;
+  --color-bg-primary-hover:         #3B82F6;
+  --color-text-primary:             #F8FAFC;
+  --color-text-secondary:           #94A3B8;
+  --color-text-disabled:            #475569;
+  --color-text-success:             #22C55E;
+  --color-text-warning:             #EAB308;
+  --color-text-error:               #EF4444;
+  --color-text-info:                #0EA5E9;
+  --color-border-default:           #475569;
+  --color-border-focus:             #93C5FD;
+  --color-interactive-primary:      #93C5FD;
+  --color-interactive-primary-hover:#3B82F6;
+}

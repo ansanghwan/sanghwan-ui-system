@@ -34,7 +34,7 @@ export const Destructive: Story = {
   render: () => (
     <Alert variant="destructive" className="w-[460px]">
       <AlertTitle>Publish blocked</AlertTitle>
-      <AlertDescription className="text-destructive">
+      <AlertDescription className="text-ink-error">
         A required token alias is missing, so the export cannot be completed yet.
       </AlertDescription>
     </Alert>

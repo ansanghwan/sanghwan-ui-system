@@ -1,40 +1,42 @@
 import * as React from 'react';
-import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '../../lib/cn';
 
-const headingVariants = cva('text-foreground', {
-  variants: {
-    level: {
-      page: 'text-3xl font-bold tracking-tight md:text-4xl',
-      section: 'text-xl font-semibold tracking-tight md:text-2xl',
-      subtitle: 'text-base font-semibold md:text-lg',
-      helper: 'text-sm font-medium text-muted-foreground',
-    },
-  },
-  defaultVariants: {
-    level: 'section',
-  },
-});
-
 type HeadingTag = 'h1' | 'h2' | 'h3' | 'h4' | 'p';
+type HeadingLevel = 'page' | 'section' | 'subtitle' | 'helper';
 
-export interface HeadingProps
-  extends
-    React.HTMLAttributes<HTMLHeadingElement | HTMLParagraphElement>,
-    VariantProps<typeof headingVariants> {
-  as?: HeadingTag;
+function getHeadingClasses(level: HeadingLevel | null | undefined) {
+  switch (level) {
+    case 'page':
+      return 'text-page-title tracking-tight text-ink-primary';
+    case 'section':
+      return 'text-section-title tracking-tight text-ink-primary';
+    case 'subtitle':
+      return 'text-info-title text-ink-primary';
+    case 'helper':
+      return 'text-body-sm text-ink-secondary';
+    default:
+      return 'text-section-title tracking-tight text-ink-primary';
+  }
 }
 
-export function Heading({
-  as,
-  className,
-  level,
-  ...props
-}: HeadingProps) {
-  const Comp =
-    as ?? (level === 'page' ? 'h2' : level === 'section' ? 'h3' : level === 'subtitle' ? 'h4' : 'p');
+export interface HeadingProps
+  extends React.HTMLAttributes<HTMLHeadingElement | HTMLParagraphElement> {
+  as?: HeadingTag;
+  level?: HeadingLevel;
+}
 
-  return <Comp className={cn(headingVariants({ level }), className)} {...props} />;
+export function Heading({ as, className, level, ...props }: HeadingProps) {
+  const Comp =
+    as ??
+    (level === 'page'
+      ? 'h2'
+      : level === 'section'
+        ? 'h3'
+        : level === 'subtitle'
+          ? 'h4'
+          : 'p');
+
+  return <Comp className={cn(getHeadingClasses(level), className)} {...props} />;
 }
 
 export function PageTitle(props: Omit<HeadingProps, 'level' | 'as'>) {

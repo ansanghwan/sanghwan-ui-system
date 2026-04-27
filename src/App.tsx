@@ -1,17 +1,76 @@
-import './App.css';
-import { HelperText, PageTitle } from './components/ui/heading';
+import { Link, Navigate, Route, Routes, useNavigate } from 'react-router-dom';
+import { TokenShowcase } from './components/ui/token-showcase';
+import { AdminLayout } from './pages/AdminLayout';
+import { DashboardPage } from './pages/DashboardPage';
+import { HomePage } from './pages/HomePage';
+import { UserManagementPage } from './pages/UserManagementPage';
+
+const PAGE_TITLES = {
+  dashboard: '대시보드',
+  users: '사용자 관리',
+} as const;
+
+function AdminAppLayout({
+  activePage,
+  children,
+}: {
+  activePage: keyof typeof PAGE_TITLES;
+  children: React.ReactNode;
+}) {
+  const navigate = useNavigate();
+
+  return (
+    <AdminLayout
+      activePage={activePage}
+      onNavigate={(key) => navigate(key === 'users' ? '/users' : '/dashboard')}
+      onGoHome={() => navigate('/')}
+      pageTitle={PAGE_TITLES[activePage]}
+    >
+      {children}
+    </AdminLayout>
+  );
+}
+
+function TokenShowcasePage() {
+  return (
+    <div className="min-h-screen bg-surface-page">
+      <div className="flex h-14 items-center justify-between border-b border-line bg-surface-card px-sec">
+        <Link
+          to="/"
+          className="text-body-sm text-ink-secondary transition-colors hover:text-ink-primary"
+        >
+          홈으로 돌아가기
+        </Link>
+        <span className="text-body-md text-ink-primary">토큰 쇼케이스</span>
+      </div>
+      <TokenShowcase />
+    </div>
+  );
+}
 
 function App() {
   return (
-    <main className="p-token-8">
-      <div className="rounded-lg border border-border bg-background p-token-6 text-foreground">
-        <HelperText>Semantic token test</HelperText>
-        <PageTitle className="mt-token-2">Tailwind token mapping</PageTitle>
-        <button className="mt-token-4 rounded-md bg-primary px-token-4 py-token-2 text-primary-foreground">
-          Primary action
-        </button>
-      </div>
-    </main>
+    <Routes>
+      <Route path="/" element={<HomePage />} />
+      <Route
+        path="/dashboard"
+        element={
+          <AdminAppLayout activePage="dashboard">
+            <DashboardPage />
+          </AdminAppLayout>
+        }
+      />
+      <Route
+        path="/users"
+        element={
+          <AdminAppLayout activePage="users">
+            <UserManagementPage />
+          </AdminAppLayout>
+        }
+      />
+      <Route path="/tokens" element={<TokenShowcasePage />} />
+      <Route path="*" element={<Navigate to="/" replace />} />
+    </Routes>
   );
 }
 

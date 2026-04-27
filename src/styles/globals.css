@@ -1,3 +1,5 @@
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -5,68 +7,196 @@
 /*
   :root = token declaration layer
   --------------------------------
-  :root is the document root selector, so normal CSS properties can be used here.
-  In this practice project, we keep :root focused on CSS variables only so that
-  design tokens and actual global styling are easier to tell apart.
+  Keep raw palette, semantic aliases, typography, spacing, radius, and effect
+  tokens together so the Tailwind mapping stays easy to inspect.
 */
 :root {
-  /*
-    Semantic color agreement
-    - primary: main CTA and important interaction color
-    - accent: secondary emphasis or selected state
-    - point: limited promotional/highlight color
-    - destructive: delete, error, or dangerous action
-    - muted: low-emphasis surface
-    - border: default divider/input/card border
-  */
-  --color-primary: 226 100% 50%;
+  /* Font family */
+  --font-sans: 'Pretendard', 'Pretendard Variable', system-ui, sans-serif;
+  --font-heading: 'Pretendard', 'Pretendard Variable', system-ui, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Consolas, monospace;
+
+  /* Raw palette */
+  --raw-white: #ffffff;
+
+  --raw-blue-50: #eff6ff;
+  --raw-blue-300: #93c5fd;
+  --raw-blue-500: #3b82f6;
+  --raw-blue-700: #1d4ed8;
+  --raw-blue-900: #1e3a8a;
+
+  --raw-gray-50: #f8fafc;
+  --raw-gray-100: #f1f5f9;
+  --raw-gray-200: #e2e8f0;
+  --raw-gray-400: #94a3b8;
+  --raw-gray-600: #475569;
+  --raw-gray-800: #1e293b;
+  --raw-gray-900: #0f172a;
+
+  --raw-green-50: #f0fdf4;
+  --raw-green-500: #22c55e;
+  --raw-green-700: #15803d;
+
+  --raw-yellow-50: #fefce8;
+  --raw-yellow-500: #eab308;
+  --raw-yellow-700: #a16207;
+
+  --raw-red-50: #fef2f2;
+  --raw-red-500: #ef4444;
+  --raw-red-700: #b91c1c;
+
+  --raw-sky-50: #f0f9ff;
+  --raw-sky-500: #0ea5e9;
+  --raw-sky-700: #0369a1;
+
+  /* Semantic color tokens */
+  --color-bg-page: var(--raw-gray-50);
+  --color-bg-surface: var(--raw-white);
+  --color-bg-subtle: var(--raw-gray-100);
+  --color-bg-primary: var(--raw-blue-500);
+  --color-bg-primary-hover: var(--raw-blue-700);
+  --color-bg-success: var(--raw-green-50);
+  --color-bg-warning: var(--raw-yellow-50);
+  --color-bg-error: var(--raw-red-50);
+  --color-bg-info: var(--raw-sky-50);
+
+  --color-text-primary: var(--raw-gray-900);
+  --color-text-secondary: var(--raw-gray-600);
+  --color-text-disabled: var(--raw-gray-400);
+  --color-text-on-primary: var(--raw-white);
+  --color-text-success: var(--raw-green-700);
+  --color-text-warning: var(--raw-yellow-700);
+  --color-text-error: var(--raw-red-700);
+  --color-text-info: var(--raw-sky-700);
+
+  --color-border-default: var(--raw-gray-200);
+  --color-border-focus: var(--raw-blue-500);
+  --color-border-error: var(--raw-red-500);
+
+  --color-interactive-primary: var(--raw-blue-500);
+  --color-interactive-primary-hover: var(--raw-blue-700);
+
+  /* Existing HSL tokens kept for current component compatibility */
+  --color-primary: 217 91% 60%;
   --color-primary-foreground: 0 0% 100%;
-  --color-accent: 272 100% 62%;
-  --color-accent-foreground: 0 0% 100%;
-  --color-point: 38 92% 50%;
-  --color-point-foreground: 222 47% 11%;
-  --color-destructive: 0 72% 51%;
+  --color-accent: 210 40% 96%;
+  --color-accent-foreground: 222 47% 11%;
+  --color-point: 201 94% 46%;
+  --color-point-foreground: 210 40% 98%;
+  --color-destructive: 0 84% 60%;
   --color-destructive-foreground: 0 0% 100%;
-  --color-background: 0 0% 100%;
+  --color-background: 210 40% 98%;
   --color-foreground: 222 47% 11%;
   --color-card: 0 0% 100%;
   --color-card-foreground: 222 47% 11%;
-  --color-muted: 214 32% 92%;
+  --color-muted: 210 40% 96%;
   --color-muted-foreground: 215 16% 47%;
   --color-border: 214 32% 88%;
 
-  /*
-    Spacing and radius tokens
-    These are mapped in tailwind.config.js as p-token-4, gap-token-2,
-    rounded-md, rounded-lg, and so on.
-  */
-  --space-1: 0.25rem;
-  --space-2: 0.5rem;
-  --space-3: 0.75rem;
-  --space-4: 1rem;
-  --space-6: 1.5rem;
-  --space-8: 2rem;
+  /* Primitive spacing */
+  --spacing-4: 4px;
+  --spacing-8: 8px;
+  --spacing-12: 12px;
+  --spacing-16: 16px;
+  --spacing-20: 20px;
+  --spacing-24: 24px;
+  --spacing-32: 32px;
+  --spacing-40: 40px;
+  --spacing-48: 48px;
 
-  --radius-sm: 0.375rem;
-  --radius-md: 0.5rem;
-  --radius-lg: 0.75rem;
-  --radius-xl: 1rem;
+  /* Existing spacing aliases */
+  --space-1: var(--spacing-4);
+  --space-2: var(--spacing-8);
+  --space-3: var(--spacing-12);
+  --space-4: var(--spacing-16);
+  --space-5: var(--spacing-20);
+  --space-6: var(--spacing-24);
+  --space-8: var(--spacing-32);
+  --space-10: var(--spacing-40);
+  --space-12: var(--spacing-48);
 
-  --font-sans: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --font-heading: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --font-mono: ui-monospace, Consolas, monospace;
+  /* Semantic spacing */
+  --spacing-component-padding-sm: var(--spacing-8);
+  --spacing-component-padding: var(--spacing-12);
+  --spacing-component-gap: var(--spacing-16);
+  --spacing-section-gap: var(--spacing-24);
+  --spacing-layout-gap: var(--spacing-32);
+
+  /* Primitive radius */
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-xl: 12px;
+  --radius-full: 9999px;
+
+  /* Semantic radius */
+  --radius-button: var(--radius-md);
+  --radius-card: var(--radius-lg);
+  --radius-input: var(--radius-md);
+  --radius-badge: var(--radius-full);
+  --radius-modal: var(--radius-xl);
+
+  /* Primitive shadow */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.07);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+
+  /* Primitive opacity */
+  --opacity-disabled: 0.4;
+  --opacity-overlay: 0.5;
+  --opacity-hover: 0.08;
+
+  /* Primitive z-index */
+  --z-base: 0;
+  --z-dropdown: 100;
+  --z-modal: 200;
+  --z-tooltip: 300;
+  --z-toast: 400;
+
+  /* Typography */
+  --typo-page-title-size: 28px;
+  --typo-page-title-height: 36px;
+  --typo-page-title-weight: 700;
+
+  --typo-section-title-size: 20px;
+  --typo-section-title-height: 28px;
+  --typo-section-title-weight: 600;
+
+  --typo-info-title-size: 16px;
+  --typo-info-title-height: 24px;
+  --typo-info-title-weight: 600;
+
+  --typo-body-size: 14px;
+  --typo-body-height: 22px;
+  --typo-body-weight: 400;
+
+  --typo-body-sm-size: 12px;
+  --typo-body-sm-height: 18px;
+  --typo-body-sm-weight: 400;
+
+  --typo-list-title-size: 14px;
+  --typo-list-title-height: 22px;
+  --typo-list-title-weight: 500;
+
+  --typo-list-body-size: 12px;
+  --typo-list-body-height: 18px;
+  --typo-list-body-weight: 400;
+
+  /* Backward-compatible aliases */
+  --typo-sec-title-size: var(--typo-section-title-size);
+  --typo-sec-title-height: var(--typo-section-title-height);
+  --typo-sec-title-weight: var(--typo-section-title-weight);
+  --typo-list-ttl-size: var(--typo-list-title-size);
+  --typo-list-ttl-height: var(--typo-list-title-height);
+  --typo-list-ttl-weight: var(--typo-list-title-weight);
 }
 
-/*
-  html/body = global style application layer
-  ------------------------------------------
-  The tokens above are values. The styles below decide where those values are
-  actually applied to the document.
-*/
 html {
   color-scheme: light;
-  font: 18px/145% var(--font-sans);
-  letter-spacing: 0.18px;
+  font-size: 16px;
+  line-height: 1.5;
+  font-family: var(--font-sans);
+  letter-spacing: -0.01em;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -77,18 +207,18 @@ body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
-  background: hsl(var(--color-background));
-  color: hsl(var(--color-foreground));
+  background: var(--color-bg-page);
+  color: var(--color-text-primary);
+  font-family: var(--font-sans);
 }
 
 #root {
   min-height: 100vh;
 }
 
-/*
-  Dark mode note
-  --------------
-  We intentionally do not use @media (prefers-color-scheme: dark) yet.
-  During the first learning phase, light mode is fixed so that token values are
-  easy to inspect. Later, dark mode can be added with [data-theme="dark"].
-*/
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
